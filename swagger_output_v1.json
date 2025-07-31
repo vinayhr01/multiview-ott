@@ -1,0 +1,2485 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Dangal API",
+    "description": "API documentation for Dangal application",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "authorization",
+      "description": "Enter your JWT token with Bearer prefix, e.g., Bearer eyJhbGciOi..."
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/admin/auth/update_role": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "example@gmail.com",
+                  "description": "Email address of the user"
+                },
+                "role": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/admin/auth/get_role": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/admin/auth/list_users": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "example@gmail.com",
+                  "description": "Email address of the user"
+                },
+                "password": {
+                  "type": "string",
+                  "format": "password",
+                  "example": "Pass@123",
+                  "description": "User password (min 8 characters, must include letters, numbers, and symbols)"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "example@gmail.com",
+                  "description": "Email address of the user"
+                },
+                "password": {
+                  "type": "string",
+                  "format": "password",
+                  "example": "Pass@123",
+                  "description": "User password (min 8 characters, must include letters, numbers, and symbols)"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/forgot-password/initiate": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "example@gmail.com",
+                  "description": "Email address of the user"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/auth/forgot-password/verify-otp": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "example@gmail.com",
+                  "description": "Email address of the user"
+                },
+                "otp": {
+                  "type": "string",
+                  "format": "numeric",
+                  "example": "123456",
+                  "description": "One-time password sent to the user"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/auth/forgot-password/update-password": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "example@gmail.com",
+                  "description": "Email address of the user"
+                },
+                "newPassword": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/auth/refresh-token": {
+      "post": {
+        "description": "Refreshes the access token using the refresh token.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "JWT refresh token with Bearer prefix",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/dau_mau/dau": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "platform": {
+                  "type": "string",
+                  "example": "",
+                  "description": "Platform from which the request is made (e.g., web, android, ios)"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/dau_mau/mau": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "platform": {
+                  "type": "string",
+                  "example": "",
+                  "description": "Platform from which the request is made (e.g., web, android, ios)"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/chart/genre-wise-completion": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/chart/content-value-wise": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/chart/top10-movies": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/chart/top10-movies-duration": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/chart/top10-shows": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/chart/top10-shows-duration": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/chart/content-type-wise": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/chart/platform-wise": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/chart/page-wise": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/real_topdata/top_contents": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "genre"
+                      },
+                      "value": {
+                        "type": "string",
+                        "example": "Action"
+                      }
+                    }
+                  },
+                  "example": [],
+                  "description": "Optional filters to narrow down the query results"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/real_topdata/top_country": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "genre"
+                      },
+                      "value": {
+                        "type": "string",
+                        "example": "Action"
+                      }
+                    }
+                  },
+                  "example": [],
+                  "description": "Optional filters to narrow down the query results"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/real_topdata/top_cities": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "genre"
+                      },
+                      "value": {
+                        "type": "string",
+                        "example": "Action"
+                      }
+                    }
+                  },
+                  "example": [],
+                  "description": "Optional filters to narrow down the query results"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/subscibers/first-watch": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "genre"
+                      },
+                      "value": {
+                        "type": "string",
+                        "example": "Action"
+                      }
+                    }
+                  },
+                  "example": [],
+                  "description": "Optional filters to narrow down the query results"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/subscibers/24hrs-first-watch": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "genre"
+                      },
+                      "value": {
+                        "type": "string",
+                        "example": "Action"
+                      }
+                    }
+                  },
+                  "example": [],
+                  "description": "Optional filters to narrow down the query results"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/real_userview/active-users": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "genre"
+                      },
+                      "value": {
+                        "type": "string",
+                        "example": "Action"
+                      }
+                    }
+                  },
+                  "example": [],
+                  "description": "Optional filters to narrow down the query results"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/real_userview/views": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "genre"
+                      },
+                      "value": {
+                        "type": "string",
+                        "example": "Action"
+                      }
+                    }
+                  },
+                  "example": [],
+                  "description": "Optional filters to narrow down the query results"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/real_durationroutes/in-mins": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "genre"
+                      },
+                      "value": {
+                        "type": "string",
+                        "example": "Action"
+                      }
+                    }
+                  },
+                  "example": [],
+                  "description": "Optional filters to narrow down the query results"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/real_durationroutes/per-viewer": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "genre"
+                      },
+                      "value": {
+                        "type": "string",
+                        "example": "Action"
+                      }
+                    }
+                  },
+                  "example": [],
+                  "description": "Optional filters to narrow down the query results"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/real_search/search_filters/{filter_type}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "filter_type",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Type of filter to apply",
+            "enum": [
+              "content_type",
+              "country",
+              "genre",
+              "platform",
+              "show_name",
+              "source",
+              "video_name"
+            ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "keyword": {
+                  "type": "string",
+                  "example": "",
+                  "description": "Search keyword or query string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/hist_topdata/top_contents": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "genre"
+                      },
+                      "value": {
+                        "type": "string",
+                        "example": "Action"
+                      }
+                    }
+                  },
+                  "example": [],
+                  "description": "Optional filters to narrow down the query results"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/hist_topdata/top_country": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "genre"
+                      },
+                      "value": {
+                        "type": "string",
+                        "example": "Action"
+                      }
+                    }
+                  },
+                  "example": [],
+                  "description": "Optional filters to narrow down the query results"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/hist_topdata/top_cities": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "genre"
+                      },
+                      "value": {
+                        "type": "string",
+                        "example": "Action"
+                      }
+                    }
+                  },
+                  "example": [],
+                  "description": "Optional filters to narrow down the query results"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/hist_userview/hactive-users": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "genre"
+                      },
+                      "value": {
+                        "type": "string",
+                        "example": "Action"
+                      }
+                    }
+                  },
+                  "example": [],
+                  "description": "Optional filters to narrow down the query results"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/hist_userview/hviews": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "genre"
+                      },
+                      "value": {
+                        "type": "string",
+                        "example": "Action"
+                      }
+                    }
+                  },
+                  "example": [],
+                  "description": "Optional filters to narrow down the query results"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/hist_durationroutes/hin-mins": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "genre"
+                      },
+                      "value": {
+                        "type": "string",
+                        "example": "Action"
+                      }
+                    }
+                  },
+                  "example": [],
+                  "description": "Optional filters to narrow down the query results"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/hist_durationroutes/hper-viewer": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "genre"
+                      },
+                      "value": {
+                        "type": "string",
+                        "example": "Action"
+                      }
+                    }
+                  },
+                  "example": [],
+                  "description": "Optional filters to narrow down the query results"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/hist_search/hsearch_filters/{filter_type}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "filter_type",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Type of filter to apply",
+            "enum": [
+              "content_type",
+              "country",
+              "genre",
+              "platform",
+              "show_name",
+              "source",
+              "video_name"
+            ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "keyword": {
+                  "type": "string",
+                  "example": "",
+                  "description": "Search keyword or query string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/engagement_routes/totalactiveusers": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/engagement_routes/total-views": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/engagement_routes/total-watch-time": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/freepaiduser_routes/overall-paid": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/freepaiduser_routes/paid-user-min": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/freepaiduser_routes/overall-free": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/freepaiduser_routes/free-user-min": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-01 00:00:00",
+                  "description": "Start date in YYYY-MM-DD HH:mm:ss format"
+                },
+                "endDate": {
+                  "type": "string",
+                  "format": "string",
+                  "example": "2025-07-05 23:59:59",
+                  "description": "End date in YYYY-MM-DD HH:mm:ss format"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/activity/active/{period}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "period",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Period (30m, 1h, 6h, or blank or [space] for default)",
+            "enum": [
+              "30m",
+              "1h",
+              "6h",
+              " "
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/userdata/user_data": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "u_id": {
+                  "example": "any"
+                },
+                "phone_number": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/userdata/user_events": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "u_id": {
+                  "example": "any"
+                },
+                "phone_number": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/userdata/user_Activity": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_id": {
+                  "example": "any"
+                },
+                "phone_number": {
+                  "example": "any"
+                },
+                "page": {
+                  "example": "any"
+                },
+                "pageSize": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/funnels/add_funnels": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "steps": {
+                  "example": "any"
+                },
+                "timeWindow": {
+                  "example": "any"
+                },
+                "startTime": {
+                  "example": "any"
+                },
+                "endTime": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/funnels/get_funnels": {
+      "post": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/funnels/get_funnels_id": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/funnels/update_funnels_id": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                },
+                "name": {
+                  "example": "any"
+                },
+                "steps": {
+                  "example": "any"
+                },
+                "timeWindow": {
+                  "example": "any"
+                },
+                "startTime": {
+                  "example": "any"
+                },
+                "endTime": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/funnels/delete_funnels_id": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/funnels/count_funnels_id": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/funnels/get_count_funnels": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "steps": {
+                  "example": "any"
+                },
+                "timeWindow": {
+                  "example": "any"
+                },
+                "startTime": {
+                  "example": "any"
+                },
+                "endTime": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/funnels/dropoffs_funnels_id": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                },
+                "dropoffStepIndex": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/funnels/non_dropoffs_funnels_id": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                },
+                "targetStepIndex": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/funnels/get_dropoffs_funnels": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "steps": {
+                  "example": "any"
+                },
+                "timeWindow": {
+                  "example": "any"
+                },
+                "startTime": {
+                  "example": "any"
+                },
+                "endTime": {
+                  "example": "any"
+                },
+                "dropoffStepIndex": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/funnels/get_non_dropoffs_funnels": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "steps": {
+                  "example": "any"
+                },
+                "timeWindow": {
+                  "example": "any"
+                },
+                "startTime": {
+                  "example": "any"
+                },
+                "endTime": {
+                  "example": "any"
+                },
+                "targetStepIndex": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/funnels/get_event_names": {
+      "post": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/funnels/get_column_names": {
+      "post": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "authorization": []
+    }
+  ]
+}
