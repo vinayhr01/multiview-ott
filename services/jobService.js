@@ -1,7 +1,7 @@
 const Job = require('../models/Job');
 
 exports.createJob = async (streamUrl, started) => {
-  const ttl = parseInt(process.env.JOB_TTL_SECONDS || '60');
+  const ttl = parseInt(process.env.JOB_TTL_SECONDS || '3600');
   const now = new Date();
   const ttlExpiresAt = new Date(now.getTime() + ttl * 1000);
 
@@ -16,7 +16,7 @@ exports.updateJobResult = async (jobId, service, data) => {
       [`status.${service}`]: 'completed'
     }
   };
-  return await Job.findByIdAndUpdate(jobId, update, { new: true });
+  return { job: await Job.findByIdAndUpdate(jobId, update, { new: true }), data: data, service: service };
 };
 
 exports.getJobResult = async (jobId, service) => {

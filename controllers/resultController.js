@@ -5,7 +5,7 @@ exports.getResult = async (req, res) => {
   const { jobId } = req.query;
 
   if (!jobId || !['h2v', 'magma', 'highlights'].includes(service)) {
-    return res.status(400).json({ error: 'Invalid parameters' });
+    return res.status(400).json({ error: 'Invalid service ' + service });
   }
 
   const result = await jobService.getJobResult(jobId, service);

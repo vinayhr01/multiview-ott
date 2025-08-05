@@ -4,7 +4,18 @@ const jobTTL = parseInt(process.env.JOB_TTL_SECONDS || '3600');
 
 const jobSchema = new mongoose.Schema(
   {
-    streamUrl: String,
+    streamUrl: {
+      type: mongoose.Schema.Types.Mixed, // can be String or Array
+      validate: {
+        validator: function (value) {
+          return (
+            typeof value === 'string' ||
+            (Array.isArray(value) && value.every(v => typeof v === 'string'))
+          );
+        },
+        message: 'streamUrl must be a string or an array of strings'
+      }
+    },
     started: Boolean,
     results: {
       h2v: Object,
