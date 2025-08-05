@@ -18,10 +18,11 @@ app.post('/h2v/start', async (req, res) => {
       service: 'h2v',
       data: streamUrl
     });
+
+    res.json({success: true, message: 'H2V started processing', data: streamUrl });
+    
     console.log(`[H2V] Callback sent for Job ID: ${jobId} with result: ${JSON.stringify(result)}`);
   }, 3000);
-
-  res.json({success: true, message: 'H2V started processing' });
 });
 
 app.listen(process.env.PORT_H2V, () => {
