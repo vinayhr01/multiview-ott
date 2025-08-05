@@ -8,10 +8,10 @@ exports.receiveCallback = async (req, res) => {
   }
 
   try {
-    const job = await jobService.updateJobResult(jobId, service, data);
+    const { job, data, service } = await jobService.updateJobResult(jobId, service, data);
     if (!job) return res.status(404).json({ error: 'Job not found' });
 
-    res.json({ message: 'Callback received' });
+    res.json({ message: 'Callback received', data: data, service: service });
   } catch (err) {
     res.status(500).json({ error: 'Internal error' });
   }

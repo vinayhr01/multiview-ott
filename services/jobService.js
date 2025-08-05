@@ -16,7 +16,7 @@ exports.updateJobResult = async (jobId, service, data) => {
       [`status.${service}`]: 'completed'
     }
   };
-  return await Job.findByIdAndUpdate(jobId, update, { new: true });
+  return { job: await Job.findByIdAndUpdate(jobId, update, { new: true }), data: data, service: service };
 };
 
 exports.getJobResult = async (jobId, service) => {
@@ -24,7 +24,7 @@ exports.getJobResult = async (jobId, service) => {
   if (!job) return null;
 
   const now = new Date();
-  const ttl = parseInt(process.env.JOB_TTL_SECONDS || '3600');
+  const ttl = parseInt(process.env.JOB_TTL_SECONDS || '60');
   const expiryTime = job.ttlExpiresAt || new Date(job.createdAt.getTime() + ttl * 1000);
   const ttlRemaining = Math.max(0, Math.floor((expiryTime - now) / 1000));
 
