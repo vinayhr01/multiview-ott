@@ -4,8 +4,8 @@ const logger = require('../utils/logger');
 // Dummy endpoints for processors
 const processorEndpoints = {
   h2v: 'http://localhost:6001/h2v/start',
-  magma: 'http://localhost:6002/magma/start',
-  highlights: 'http://localhost:6003/highlights/start'
+  // magma: 'http://localhost:6002/magma/start',
+  // highlights: 'http://localhost:6003/highlights/start'
 };
 
 exports.triggerProcessors = async (jobId, streamUrl) => {
