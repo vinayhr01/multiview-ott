@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-const jobTTL = parseInt(process.env.JOB_TTL_SECONDS || '3600');
-
 const jobSchema = new mongoose.Schema(
   {
     streamUrl: {
@@ -27,14 +25,22 @@ const jobSchema = new mongoose.Schema(
       magma: { type: String, default: 'pending' },
       highlights: { type: String, default: 'pending' }
     },
-    ttlExpiresAt: Date
+
+    // Expiry date for this specific job
+    ttlExpiresAt: {
+      type: Date,
+      default: function () {
+        const ttlSeconds = parseInt(process.env.JOB_TTL_SECONDS || '3600');
+        return new Date(Date.now() + ttlSeconds * 1000);
+      }
+    }
   },
   {
-    timestamps: true
+    timestamps: true // adds createdAt, updatedAt
   }
 );
 
-// TTL Index on createdAt (auto-delete)
-jobSchema.index({ createdAt: 1 }, { expireAfterSeconds: jobTTL });
+// Per-job TTL index — expires exactly at ttlExpiresAt
+jobSchema.index({ ttlExpiresAt: 1 }, { expireAfterSeconds: 0 });
 
 module.exports = mongoose.model('Job', jobSchema);
