@@ -9,12 +9,12 @@ exports.createJob = async (streamUrl, started) => {
   return await job.save();
 };
 
-exports.updateJobResult = async (jobId, service, data) => {
+exports.updateJobResult = async (jobId, service, data, status) => {
   const update = {
     $set: {
       [`results.${service}`]: data,
-      [`status.${service}`]: 'completed'
-    }
+      [`status.${service}`]: status || 'completed'
+    },
   };
   return { job: await Job.findByIdAndUpdate(jobId, update, { new: true }), data: data, service: service };
 };

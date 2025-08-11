@@ -2,14 +2,14 @@ const jobService = require("../services/jobService");
 const updatesService = require("../services/updatesService");
 
 exports.receiveCallback = async (req, res) => {
-  const { jobId, service, data } = req.body;
+  const { jobId, service, data, status } = req.body;
 
   if (!jobId || !service || !data) {
     return res.status(400).json({ error: "Invalid callback data" });
   }
 
   try {
-    const { job } = await jobService.updateJobResult(jobId, service, data);
+    const { job } = await jobService.updateJobResult(jobId, service, data, status);
 
     if (!job) return res.status(404).json({ error: "Job not found" });
 
