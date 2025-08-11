@@ -33,6 +33,7 @@ exports.receiveCallback = async (req, res) => {
       data: job?.results[service],
       status: job?.status[service],
       updatedAt: job?.updatedAt,
+      createdAt: job?.createdAt,
       expiry: job?.ttlExpiresAt,
       time_remain: Math.max(
         0,
