@@ -33,8 +33,11 @@ exports.receiveCallback = async (req, res) => {
       status: job?.status[service],
       updatedAt: job?.updatedAt,
       expiry: job?.ttlExpiresAt,
-      time_remain: job?.ttlRemaining,
-      service: job?.service,
+      time_remain: Math.max(
+        0,
+        Math.floor((new Date(job?.ttlExpiresAt) - new Date()) / 1000)
+      ),
+      service: service,
     });
   } catch (err) {
     res.status(500).json({ error: "Internal error " + err });
