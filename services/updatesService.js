@@ -19,8 +19,7 @@ exports.removeClient = (jobId, res) => {
 exports.sendUpdate = (jobId, data) => {
   if (clients[jobId]) {
     clients[jobId].forEach(res => {
-      // res.write(`data: ${JSON.stringify(data)}\n\n`);
-      res.json(data);
+      res.write(`data: ${JSON.stringify(data)}\n\n`);
     });
   }
 };
