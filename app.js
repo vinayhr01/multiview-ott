@@ -15,7 +15,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use('/api', routes);
 
-app.get('/health', (req, res) => {
+app.use('*', (req, res) => {
   res.status(200).send({ status: 'OK', message: 'Healthy' });
 });
 
