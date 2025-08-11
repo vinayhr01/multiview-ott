@@ -14,7 +14,7 @@ exports.receiveCallback = async (req, res) => {
     if (!job) return res.status(404).json({ error: "Job not found" });
 
         updatesService.sendUpdate(jobId, {
-      service,
+      service: job?.service,
       status: job?.status[service],
       result: job?.results[service],
       updatedAt: job?.updatedAt,
@@ -30,6 +30,8 @@ exports.receiveCallback = async (req, res) => {
       data: job?.results[service],
       status: job?.status[service],
       updatedAt: job?.updatedAt,
+      expiry: job?.ttlExpiresAt,
+      time_remain: job?.ttlRemaining,
       service: job?.service,
     });
   } catch (err) {
