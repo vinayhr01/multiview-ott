@@ -35,7 +35,7 @@ exports.receiveCallback = async (req, res) => {
       updatedAt: job?.updatedAt,
       createdAt: job?.createdAt,
       expiry: job?.ttlExpiresAt,
-      time_remain: Math.max(
+      timeRemain: Math.max(
         0,
         Math.floor((new Date(job?.ttlExpiresAt) - new Date()) / 1000)
       ),
