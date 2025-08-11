@@ -16,15 +16,17 @@ exports.receiveCallback = async (req, res) => {
     console.log("Job is ", job);
 
         updatesService.sendUpdate(jobId, {
-      service: job?.service,
+      service: service,
       status: job?.status[service],
       result: job?.results[service],
       updatedAt: job?.updatedAt,
-      ttlRemaining: Math.max(
+      timeRemain: Math.max(
         0,
         Math.floor((new Date(job?.ttlExpiresAt) - new Date()) / 1000)
       ),
-      ttlExpiresAt: job?.ttlExpiresAt,
+      expiry: job?.ttlExpiresAt,
+      createdAt: job?.createdAt,
+      jobId: jobId,
     });
 
     res.json({
