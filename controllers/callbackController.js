@@ -29,6 +29,7 @@ exports.receiveCallback = async (req, res) => {
 
     res.json({
       message: "Callback received",
+      jobId: jobId,
       data: job?.results[service],
       status: job?.status[service],
       updatedAt: job?.updatedAt,
