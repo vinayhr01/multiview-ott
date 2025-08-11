@@ -15,6 +15,10 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use('/api', routes);
 
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK', message: 'Healthy' });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
