@@ -1,7 +1,7 @@
 const jobService = require('../services/jobService');
 const processorService = require('../services/processorService');
 
-exports.stopController = async (req, res) => {
+exports.stopStream = async (req, res) => {
   try {
     const { streamUrl, started, jobId } = req.body;
 
