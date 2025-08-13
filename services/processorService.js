@@ -3,7 +3,7 @@ const logger = require('../utils/logger');
 
 // Processor endpoints
 const processorEndpoints = {
-  h2v: 'http://localhost:6001/h2v/start',
+  // h2v: 'http://localhost:6001/h2v/start',
   // magma: 'http://localhost:6002/magma/start',
   highlights: 'http://164.52.192.2:7858/detect_highlight'
 };
