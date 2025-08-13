@@ -1,14 +1,59 @@
 <!DOCTYPE html>
 <html>
-<body>
-  <h1>Testing SSE</h1>
-  <!-- <script>
-    const jobId = "6891b1787d1ded5703c258cf"; // replace with real job ID
-    const es = new EventSource(`http://localhost:3000/api/updates/${jobId}`);
+  <head>
+    <meta charset="UTF-8" />
+    <title>SSE JSON Example</title>
+  </head>
+  <body>
+    <h1>Live Updates</h1>
+    <div id="updates"></div>
 
-    es.onmessage = (event) => {
-      console.log("Update:", JSON.parse(event.data));
-    };
-  </script> -->
-</body>
+    <script>
+      // Connect to your SSE endpoint
+      const jobId = "6899b4a4bedcc774dc6eb90c"; // replace with actual jobId
+      const evtSource = new EventSource(
+        `http://13.212.112.213:3000/api/updates/${jobId}`
+      );
+
+      evtSource.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data); // parse JSON from SSE
+
+          let listCounter = 1;
+
+          function renderList(obj) {
+            const fragment = document.createDocumentFragment();
+
+            // Add <p> before each list
+            const p = document.createElement("p");
+            p.textContent = `list_name_${listCounter++}`;
+            fragment.appendChild(p);
+
+            const ul = document.createElement("ul");
+            for (const key in obj) {
+              const li = document.createElement("li");
+              if (typeof obj[key] === "object" && obj[key] !== null) {
+                li.innerHTML = `<strong>${key}:</strong>`;
+                li.appendChild(renderList(obj[key])); // recursion for nested object
+              } else {
+                li.innerHTML = `<strong>${key}:</strong> ${obj[key]}`;
+              }
+              ul.appendChild(li);
+            }
+            fragment.appendChild(ul);
+
+            return fragment;
+          }
+
+          document.getElementById("updates").appendChild(renderList(data));
+        } catch (err) {
+          console.error("Invalid JSON from SSE", err);
+        }
+      };
+
+      evtSource.onerror = (err) => {
+        console.error("SSE connection error:", err);
+      };
+    </script>
+  </body>
 </html>

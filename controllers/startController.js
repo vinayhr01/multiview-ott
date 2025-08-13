@@ -8,7 +8,7 @@ exports.startStream = async (req, res) => {
   }
 
   const job = await jobService.createJob(streamUrl, started);
-  await processorService.triggerProcessors(job._id, streamUrl);
+  await processorService.triggerProcessors(job._id, streamUrl, job.ttlExpiresAt, job.updatedAt);
 
   res.json({ message: 'Processing started', jobId: job._id, expiry: job.ttlExpiresAt, updated_at: job.updatedAt });
 };
