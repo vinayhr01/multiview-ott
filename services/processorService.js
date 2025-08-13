@@ -30,3 +30,26 @@ exports.triggerProcessors = async (jobId, streamUrl, expiry, updated_at, start) 
     }
   }
 };
+
+exports.stopTriggerProcess = async (jobId, streamUrl, expiry, updated_at, start) => {
+  for (const [service, endpoint] of Object.entries(processorEndpoints)) {
+    try {
+      if (service === 'highlights') {
+        await axios.post(endpoint, {
+          url: streamUrl,
+          job_id: jobId,
+          start: start
+        }, {
+          headers: { 'Content-Type': 'application/json' }
+        });
+      } else {
+        
+        await axios.post(endpoint, { jobId, streamUrl, expiry, updated_at });
+      }
+
+      logger(`${service} processor triggered`);
+    } catch (err) {
+      logger(`Failed to trigger ${service}`, err);
+    }
+  }
+};
